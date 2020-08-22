@@ -19,6 +19,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 
 
+
 class HeaderComponent extends Component {
   constructor(props) {
     super(props);
@@ -29,16 +30,16 @@ class HeaderComponent extends Component {
       <div className="header">
         <AppBar position="relative">
           <Toolbar>
-            <div className="header-content">
+            <div className="header-content container">
               <Typography variant="h6" color="inherit" noWrap>
                 E Cube
                 </Typography>
 
 
               <div className="menu-bar">
-                <span>Latest Movies</span>
-                <span>UpComing Movies</span>
-                <span>Latest Events</span>
+                <span style={{marginRight:'15px'}}>Latest Movies</span>
+                <span style={{marginRight:'15px'}}>UpComing Movies</span>
+                <span style={{marginRight:'15px'}}>Latest Events</span>
                 <div className="form-group" style={{ marginBottom: '0px' }}>
                   <input type="text" placeholder="Search" className="form-control"></input>
                 </div>

@@ -11,6 +11,6 @@
 .menu-bar{
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    width: 50%;
+    justify-content: flex-end;
+    
 }
