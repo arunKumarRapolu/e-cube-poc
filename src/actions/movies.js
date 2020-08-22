@@ -4,7 +4,9 @@ import { movieService } from '../services/movie';
 export const movies = {
     getLatest,
     getUpcoming,
-    getMovieDetails
+    getDetails,
+    saveBookingInfo,
+    saveUserSelects
 };
 
 function getLatest() {
@@ -43,10 +45,10 @@ function getUpcoming() {
     function failure(error) { return { type: constants.GET_UPCOMING_FAILURE, error } }
 }
 
-function getMovieDetails(id) {
+function getDetails(id) {
     
     return dispatch => {
-        movieService.getMovieDetails(id)
+        movieService.getDetails(id)
             .then(
                 data => { 
                     dispatch(success(data.data));
@@ -57,6 +59,14 @@ function getMovieDetails(id) {
             );
     };
 
-    function success(list) { return { type: constants.GET_DETAILS_SUCCESS, list } }
+    function success(data) { return { type: constants.GET_DETAILS_SUCCESS, data } }
     function failure(error) { return { type: constants.GET_DETAILS_FAILURE, error } }
+}
+
+function saveBookingInfo(data){
+    return { type: constants.SAVE_BOOKING_INFO, data }
+}
+
+function saveUserSelects(data){
+    return { type: constants.SAVE_USER_SELECTS, data }
 }

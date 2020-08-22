@@ -3,7 +3,9 @@ import { constants } from '../constants/allConstants';
 const initialState = {
   latest:[],
   upComing:[],
-  details:{}
+  details:{},
+  movieInfo:{},
+  userSelectedInfo:{}
 }
 
 export function movieReducer(state = initialState, action) {
@@ -37,6 +39,16 @@ export function movieReducer(state = initialState, action) {
     return {
         ...state,
         details:{}
+    };
+    case constants.SAVE_BOOKING_INFO:
+    return {
+        ...state,
+        movieInfo: action.data
+    };
+    case constants.SAVE_USER_SELECTS:
+    return {
+        ...state,
+        userSelectedInfo: action.data
     };
     default:
       return state

@@ -1,7 +1,7 @@
 import { constants } from '../constants/allConstants.js';
 import { eventService } from '../services/events';
 
-export const movies = {
+export const events = {
     getEvents
 };
 

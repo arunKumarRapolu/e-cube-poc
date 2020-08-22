@@ -9,12 +9,12 @@ export function eventReducer(state = initialState, action) {
     case constants.GET_EVENTS_SUCCESS:
       return {
         ...state,
-        latest: action.list
+        events: action.list
       };
     case constants.GET_EVENTS_FAILURE:
       return {
         ...state,
-        latest:[]
+        events:[]
       };
     default:
       return state

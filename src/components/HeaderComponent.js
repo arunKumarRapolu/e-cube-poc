@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import {withRouter} from "react-router-dom";
+import {compose} from "redux";
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -19,11 +22,22 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 
 
+
 class HeaderComponent extends Component {
   constructor(props) {
     super(props);
   }
-
+  gotoPage(category){
+    if(category === 'latest'){
+      this.props.history.push('/latestMovies');
+    }
+    else if(category === 'upcoming'){
+      this.props.history.push('/upcomingMovies');
+    }
+    else{
+      this.props.history.push('/latestEvents');
+    }
+  }
   render() {
     return (
       <div className="header">
@@ -36,9 +50,9 @@ class HeaderComponent extends Component {
 
 
               <div className="menu-bar">
-                <span>Latest Movies</span>
-                <span>UpComing Movies</span>
-                <span>Latest Events</span>
+                <span className="headerOption" onClick={this.gotoPage.bind(this,'latest')}>Latest Movies</span>
+                <span className="headerOption" onClick={this.gotoPage.bind(this,'upcoming')}>UpComing Movies</span>
+                <span className="headerOption" onClick={this.gotoPage.bind(this,'events')}>Latest Events</span>
                 <div className="form-group" style={{ marginBottom: '0px' }}>
                   <input type="text" placeholder="Search" className="form-control"></input>
                 </div>
@@ -53,4 +67,8 @@ class HeaderComponent extends Component {
   }
 }
 
-export default HeaderComponent;
+
+export default compose(
+  withRouter,
+  connect('', '')
+)(HeaderComponent);

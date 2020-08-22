@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
-
 import Grid from '@material-ui/core/Grid';
 import { Carousel, Card, Button } from 'react-bootstrap';
 import { movies } from '../actions/movies';
-
+import CardComponent from "./common/Card";
 
 class HomePage extends Component {
     constructor(props){
@@ -18,6 +17,26 @@ class HomePage extends Component {
     }
 
   render() {
+
+    let dataA = [{"_id":"5ab12612f36d2879268f284a","name":"Black Panther","language":"ENGLISH","rate":4.5,"type":"Action Adventure Fantasy","imageUrl":"https://image.ibb.co/f0hhZc/bp.jpg"},
+    {"_id":"5ab12666f36d2879268f2902","name":"Death Wish","language":"ENGLISH","type":"Action Crime Thriller","rate":3.2,"imageUrl":"https://image.ibb.co/gC9PfH/dw.jpg"},
+    {"_id":"5ab12678f36d2879268f291d","name":"Coco","language":"ENGLISH","type":"Adventure Animation Family","rate":5,"imageUrl":"https://image.ibb.co/dQwWSx/coco.jpg"},
+    {"_id":"5ab12666f36d2879268f2902","name":"Death Wish","language":"ENGLISH","type":"Action Crime Thriller","rate":3.2,"imageUrl":"https://image.ibb.co/gC9PfH/dw.jpg"},
+    {"_id":"5ab12678f36d2879268f291d","name":"Coco","language":"ENGLISH","type":"Adventure Animation Family","rate":5,"imageUrl":"https://image.ibb.co/dQwWSx/coco.jpg"},
+    {"_id":"5ab12666f36d2879268f2902","name":"Death Wish","language":"ENGLISH","type":"Action Crime Thriller","rate":3.2,"imageUrl":"https://image.ibb.co/gC9PfH/dw.jpg"},
+    {"_id":"5ab12678f36d2879268f291d","name":"Coco","language":"ENGLISH","type":"Adventure Animation Family","rate":5,"imageUrl":"https://image.ibb.co/dQwWSx/coco.jpg"}]
+
+    // const renderRecommandedMovies = this.props.latestMovies.map((movie,i) => {
+    //   return(
+    //     <CardComponent data={movie}/>
+    //   )
+    // });
+
+    const renderRecommandedMovies = dataA.map((movie,i) => {
+      return(
+        <CardComponent key={i} data={movie}/>
+      )
+    });
     return (
       <div className="main-page">
         <Carousel>
@@ -46,62 +65,14 @@ class HomePage extends Component {
             />
           </Carousel.Item>
         </Carousel>
-
+        <div className="homePage-recommand"> Recommended Movies</div>
         <Grid container style={{ padding: '20px' }}>
-          <Grid item md={3} sm={12}>
-            <Card style={{ width: '18rem' }}>
-              <Card.Img variant="top" src="https://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/04/01/Pictures/_46a0b2c0-3590-11e8-8c5f-3c6cc031651e.jpg" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up the bulk of
-                  the card's content.
-    </Card.Text>
-                <Button variant="primary">Book Now</Button>
-              </Card.Body>
-            </Card>
-          </Grid>
-          <Grid item md={3} sm={12}>
-            <Card style={{ width: '18rem' }}>
-              <Card.Img variant="top" src="https://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/04/01/Pictures/_46a0b2c0-3590-11e8-8c5f-3c6cc031651e.jpg" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up the bulk of
-                  the card's content.
-    </Card.Text>
-    <Button variant="primary">Book Now</Button>
-              </Card.Body>
-            </Card>
-          </Grid>
-          <Grid item md={3} sm={12}>
-            <Card style={{ width: '18rem' }}>
-              <Card.Img variant="top" src="https://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/04/01/Pictures/_46a0b2c0-3590-11e8-8c5f-3c6cc031651e.jpg" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up the bulk of
-                  the card's content.
-    </Card.Text>
-    <Button variant="primary">Book Now</Button>
-              </Card.Body>
-            </Card>
-          </Grid>
-
-          <Grid item md={3} sm={12}>
-            <Card style={{ width: '18rem' }}>
-              <Card.Img variant="top" src="https://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/04/01/Pictures/_46a0b2c0-3590-11e8-8c5f-3c6cc031651e.jpg" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up the bulk of
-                  the card's content.
-    </Card.Text>
-    <Button variant="primary">Book Now</Button>
-              </Card.Body>
-            </Card>
-          </Grid>
-
+          {this.props.latestMovies.length > 0 ?
+            renderRecommandedMovies:
+            <div className="nodata">
+                No Movies Found
+            </div>
+          }
         </Grid>
 
 
@@ -124,5 +95,3 @@ export default compose(
     withRouter,
     connect(mapState, actionCreators)
   )(HomePage);
-
-//export default HomePage;
