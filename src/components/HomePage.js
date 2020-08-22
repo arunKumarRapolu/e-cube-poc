@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import {withRouter} from "react-router-dom";
+import {compose} from "redux";
 
 import { Carousel, Card, Button } from 'react-bootstrap';
-
+import { movies } from '../actions/movies';
 
 
 class HomePage extends Component {
@@ -9,9 +12,9 @@ class HomePage extends Component {
         super(props);
     }
 
-    // componentDidMount(){
-    //     this.props.getMovies()
-    // }
+    componentDidMount(){
+        this.props.getMovies()
+    }
 
     render() {
         return (
@@ -72,14 +75,18 @@ class HomePage extends Component {
 }
 
 function mapState(state) {
+  const {movieReducer } = state;
+  const latestMovies = movieReducer.latest;
+
+  return{latestMovies};
     
 }
-// const actionCreators = {
-//     getMovies: movies.getLatest,
-//   };
-// export default compose(
-//     withRouter,
-//     connect(mapState, actionCreators)
-//   )(HomePage);
+const actionCreators = {
+    getMovies: movies.getLatest,
+  };
+export default compose(
+    withRouter,
+    connect(mapState, actionCreators)
+  )(HomePage);
 
-export default HomePage;
+//export default HomePage;
