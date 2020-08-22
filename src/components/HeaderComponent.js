@@ -13,38 +13,44 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
+
 
 class HeaderComponent extends Component {
-    constructor(props){
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    render() {
-        return (
-            <AppBar position="relative">
-                <Toolbar>
-                <Typography variant="h6" color="inherit" noWrap>
-                    E Cube
+  render() {
+    return (
+      <div className="header">
+        <AppBar position="relative">
+          <Toolbar>
+            <div className="header-content">
+              <Typography variant="h6" color="inherit" noWrap>
+                E Cube
                 </Typography>
-                <Button aria-controls="simple-menu" aria-haspopup="true">
-  Open Menu
-</Button>
 
-<Button aria-controls="simple-menu" aria-haspopup="true">
-  Open Menu
-</Button>
 
-<Button aria-controls="simple-menu" aria-haspopup="true">
-  Open Menu
-</Button>
-                <form className="headerSearchBar" noValidate autoComplete="off">
-  <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-</form>
+              <div className="menu-bar">
+                <span>Latest Movies</span>
+                <span>UpComing Movies</span>
+                <span>Latest Events</span>
+                <div className="form-group" style={{ marginBottom: '0px' }}>
+                  <input type="text" placeholder="Search" className="form-control"></input>
+                </div>
+              </div>
+            </div>
 
-                </Toolbar>
-            </AppBar>
-        )
-    }
+          </Toolbar>
+        </AppBar>
+      </div>
+
+    )
+  }
 }
 
 export default HeaderComponent;
