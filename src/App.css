@@ -1,3 +1,16 @@
 .headerSearchBar{
     background-color: white;
 }
+
+.header-content{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+.menu-bar{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 50%;
+}
