@@ -1,21 +1,10 @@
 import { combineReducers } from 'redux';
-
-import { authentication } from './authentication';
-import { registration } from './registration';
-import {bookingRelated} from './bookingRelated';
-import {pharmacyRelated} from './pharmacyRelated';
-import {productRelated} from './productRelated';
-import {doctorRelated} from './doctorRelated';
-import {loader} from './loader';
+import {movieReducer} from './movieReducer';
+import {eventReducer} from './eventReducer';
 
 const rootReducer = combineReducers({
-  authentication,
-  registration,
-  bookingRelated,
-  pharmacyRelated,
-  loader,
-  productRelated,
-  doctorRelated
+  movieReducer,
+  eventReducer
 });
 
 export default rootReducer;
