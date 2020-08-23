@@ -27,7 +27,7 @@ class BookingPage extends Component {
             radioSelected:null,
             radioSelectedVal:null,
             selectSlotError:false,
-            dateSelected:'',
+            dateSelected:null,
             noOfSeats:1,
             isDateSelcted: true,
             availableShows:[
@@ -56,7 +56,7 @@ class BookingPage extends Component {
 
     gotoConfirmation(){
         let proceed = true;
-        if(this.state.dateSelected === ''){
+        if(this.state.dateSelected === null){
             this.setState({isDateSelcted: false});
             proceed = false;
         }
@@ -120,6 +120,7 @@ class BookingPage extends Component {
                                             />
                                         </FormControl>
                                     </MuiPickersUtilsProvider>
+                                    {!this.state.isDateSelcted ? <div className="errorMsg">Please select Date</div> : null}
                                 </Col>
                             </Row>
                             <Row className="rowpadding">
@@ -130,6 +131,7 @@ class BookingPage extends Component {
                                     <Row>
                                         {renderShows}
                                     </Row>
+                                    {this.state.selectSlotError ? <div className="errorMsg">Please select Time</div> : null }
                                 </Col>
                             </Row>
                             <Row className="rowpadding">
