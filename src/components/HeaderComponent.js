@@ -100,6 +100,7 @@ class HeaderComponent extends Component {
                 <span className="headerOption" onClick={this.gotoPage.bind(this,'events')}>Latest Events</span>
                 <div className="form-group" style={{ marginBottom: '0px' }}>
                   <input type="text" placeholder="Search" className="form-control" value={this.state.searchValue} onChange={this.startSearch.bind(this)}></input>
+                  {/* header change */}
                 </div>
               </div>
             </div>
