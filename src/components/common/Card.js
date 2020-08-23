@@ -18,8 +18,8 @@ class CardComponent extends Component {
       const {data} = this.props;
         return (
             <Grid item md={3} sm={12}>
-            <Card style={{ width: '18rem', cursor:'pointer' }} onClick={this.gotoDetails.bind(this,data._id)}>
-              <Card.Img variant="top" src={data.imageUrl} />
+            <Card style={{cursor:'pointer',margin:'15px' }} onClick={this.gotoDetails.bind(this,data._id)}>
+              <Card.Img variant="top" src={data.imageUrl}  style={{maxWidth:'100%'}}/>
               <Card.Body>
                 <Card.Title>{data.name}</Card.Title>
                 <Button variant="primary">Book Now</Button>

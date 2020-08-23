@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Card from '@material-ui/core/Card';
 import { connect } from "react-redux";
-import {withRouter} from "react-router-dom";
-import {compose} from "redux";
-import {Button, Row, Col } from 'react-bootstrap';
+import { withRouter } from "react-router-dom";
+import { compose } from "redux";
+import { Button, Row, Col } from 'react-bootstrap';
 import { movies } from '../actions/movies';
 
 class DetailPage extends Component {
@@ -11,73 +11,93 @@ class DetailPage extends Component {
         super(props);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.getDetails(this.props.match.params.id)
     }
 
-    gotoBooking(data){
+    gotoBooking(data) {
         this.props.saveBookingInfo(data);
         this.props.history.push('/booking');
     }
 
     render() {
-        let data = {"_id":"5ab12612f36d2879268f284a","name":"Black Panther","language":"ENGLISH","rate":4.5,"type":"Action Adventure Fantasy","imageUrl":"https://image.ibb.co/f0hhZc/bp.jpg"}
+        let data = { "_id": "5ab12612f36d2879268f284a", "name": "Black Panther", "language": "ENGLISH", "rate": 4.5, "type": "Action Adventure Fantasy", "imageUrl": "https://image.ibb.co/f0hhZc/bp.jpg" }
         return (
-           <React.Fragment>
-               {
-                   Object.keys(this.props.details).length > 0 ?
-                   <React.Fragment>
-                   <Row>
-                       <Col md="4">
-                       <img src={data.imageUrl}/>
-                       </Col>
-                       <Col md="8">
-                           <Row>
-                               <Col md="6">
-                                   {data.name}
-                               </Col>
-                               <Col md="6">
-                                    Language: {data.language}
-                               </Col>
-                           </Row>
-                           <Row>
-                               <Col>
-                               Type: {data.type}
-                               </Col>
-                           </Row>
-                           <Row>
-                               <Col>
-                               Rating: {data.rate}
-                               </Col>
-                           </Row>
-                       </Col>
-                   </Row>
-                   <Row>
-                        <Col><Button variant="primary" onClick={this.gotoBooking.bind(this,data)}>Book Now</Button></Col>
-                   </Row>
-                   </React.Fragment> :
-                   <div className="noDetails">
-                       No Details Found
-                    </div>
-               }
-           </React.Fragment>
+
+
+
+            < div className="detailsPage" style={{ padding: '40px', width: '100%' }
+            }>
+
+                <div className="container">
+                    {
+                        Object.keys(this.props.details).length > 0 ?
+                            (
+                                <Card>
+                                    <div className="row">
+                                        <div className="col-md-3">
+                                        <img src={data.imageUrl} style={{width:'100%'}}/>
+                                        </div>
+                                        <div className="col-md-9 p-3">
+                                            <div className="row rowpadding">
+                                                <div className="col-md-6">
+                                                    <p>Movie Name : 
+                                                        <span>{data.name}</span>
+                                                        </p>
+                                                </div>
+                                                <div className="col-md-6">
+                                                Language: {data.language}
+                                                </div>
+                                            </div>
+                                            <div className="row rowpadding">
+                                                <div className="col-md-12">
+                                                Type: {data.type}
+                                                </div>
+                                            </div>
+                                            <div className="row rowpadding">
+                                                <div className="col-md-12">
+                                                Rating: {data.rate}
+                                                </div>
+                                            </div>
+                                            <div className="row rowpadding">
+                                                <div className="col-md-12">
+                                                <Button variant="primary" onClick={this.gotoBooking.bind(this, data)}>Book Now</Button>                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </Card>
+                            ) : (
+                                <div className="noDetails">
+                                    No Details Found
+                                </div>
+                            )
+
+                    }
+
+                </div>
+            </div >
+
+
+
+
+
         )
     }
 }
 
 function mapState(state) {
-    const {movieReducer } = state;
+    const { movieReducer } = state;
     const details = movieReducer.details;
-  
-    return{details};
-      
-  }
-  const actionCreators = {
-        saveBookingInfo : movies.saveBookingInfo,
-        getDetails: movies.getDetails,
-    };
-  export default compose(
-      withRouter,
-      connect(mapState, actionCreators)
-    )(DetailPage);
-  
+
+    return { details };
+
+}
+const actionCreators = {
+    saveBookingInfo: movies.saveBookingInfo,
+    getDetails: movies.getDetails,
+};
+export default compose(
+    withRouter,
+    connect(mapState, actionCreators)
+)(DetailPage);

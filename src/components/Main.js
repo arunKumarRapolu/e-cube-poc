@@ -10,9 +10,12 @@ class Main extends Component {
 
     render() {
         return (
-            <div>
+            <div className="app-main">
                 <HeaderComponent />
+                <div className="app-content">
                 {this.props.children}
+                </div>
+               
                 <FooterComponent />
             </div>
         )
