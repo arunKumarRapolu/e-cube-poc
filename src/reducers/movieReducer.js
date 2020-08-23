@@ -7,7 +7,8 @@ const initialState = {
   upComingCopy:[],
   details:{},
   movieInfo:{},
-  userSelectedInfo:{}
+  userSelectedInfo:{},
+  pageName:''
 }
 
 export function movieReducer(state = initialState, action) {
@@ -65,7 +66,12 @@ export function movieReducer(state = initialState, action) {
       return {
           ...state,
           upComing: action.list
-      };
+    };
+    case constants.SAVE_PAGE:
+      return {
+          ...state,
+          pageName: action.page
+    };
     default:
       return state
   }

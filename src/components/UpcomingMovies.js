@@ -13,6 +13,7 @@ class UpcomingMovies extends Component {
 
     componentDidMount(){
         this.props.getMovies();
+        this.props.savePage(this.props.location.pathname);
     }
 
     render() {
@@ -46,6 +47,7 @@ function mapState(state) {
   }
   const actionCreators = {
       getMovies: movies.getUpcoming,
+      savePage: movies.savePage
     };
   export default compose(
       withRouter,

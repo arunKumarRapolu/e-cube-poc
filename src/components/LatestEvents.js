@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 import { events } from '../actions/events';
+import { movies } from '../actions/movies';
 import CardComponent from "./common/Card";
 import Grid from '@material-ui/core/Grid';
 
@@ -13,6 +14,7 @@ class LatestEvents extends Component {
 
     componentDidMount(){
         this.props.getEvents();
+        this.props.savePage(this.props.location.pathname);
     }
 
     render() {
@@ -46,6 +48,7 @@ function mapState(state) {
   }
   const actionCreators = {
       getEvents: events.getEvents,
+      savePage: movies.savePage
     };
   export default compose(
       withRouter,

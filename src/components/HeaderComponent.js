@@ -27,55 +27,43 @@ import { events } from '../actions/events';
 class HeaderComponent extends Component {
   constructor(props) {
     super(props);
-    let pageName = 'home';
-    if(this.props.location.pathname === '/latestMovies'){
-      pageName = 'latest';
-    }
-    else if(this.props.location.pathname === '/upcomingMovies'){
-      pageName = 'upcoming';
-    }
-    else if(this.props.location.pathname === '/latestEvents'){
-      pageName = 'events';
-    }
     this.state={
-      selectedPage:pageName,
       searchValue:''
     }
   }
+
   gotoPage(category){
+    this.setState({searchValue:''});
     if(category === 'latest'){
-      this.setState({selectedPage:'latest',searchValue:''});
       this.props.history.push('/latestMovies');
     }
     else if(category === 'upcoming'){
-      this.setState({selectedPage:'upcoming',searchValue:''});
       this.props.history.push('/upcomingMovies');
     }
     else{
-      this.setState({selectedPage:'events',searchValue:''});
       this.props.history.push('/latestEvents');
     }
   }
   gotoHome(){
-    this.setState({selectedPage:'home'});
     this.props.history.push('/');
   }
   startSearch(e){
-    if(this.state.selectedPage === 'latest' || this.state.selectedPage === 'home'){
+    const {pageName} = this.props;
+    if(pageName === '/latestMovies' || pageName === '/'){
       let filterData = this.props.latestMoviesCopy.filter(function(item) {
         return ((item.name.toUpperCase()).startsWith(e.target.value.toUpperCase()));
       });
       this.props.setlatestMovies(filterData);
       this.setState({searchValue:e.target.value});
     }
-    else if(this.state.selectedPage === 'upcoming'){
+    else if(pageName === '/upcomingMovies'){
       let filterData = this.props.upcomingMoviesCopy.filter(function(item) {
         return ((item.name.toUpperCase()).startsWith(e.target.value.toUpperCase()));
       });
       this.props.setUpcomingMovies(filterData);
       this.setState({searchValue:e.target.value});
     }
-    else if(this.state.selectedPage === 'events'){
+    else if(pageName === '/latestEvents'){
       let filterData = this.props.eventsCopy.filter(function(item) {
         return ((item.name.toUpperCase()).startsWith(e.target.value.toUpperCase()));
       });
@@ -84,6 +72,11 @@ class HeaderComponent extends Component {
     }
   }
   render() {
+    const {pageName} = this.props;
+    let showSearch = false;
+    if(pageName === '/' || pageName === '/upcomingMovies' || pageName === '/latestMovies' || pageName === '/latestEvents'){
+      showSearch = true;
+    }
     return (
       <div className="header">
         <AppBar position="relative">
@@ -95,12 +88,14 @@ class HeaderComponent extends Component {
 
 
               <div className="menu-bar">
-                <span className="headerOption" onClick={this.gotoPage.bind(this,'latest')}>Latest Movies</span>
-                <span className="headerOption" onClick={this.gotoPage.bind(this,'upcoming')}>UpComing Movies</span>
-                <span className="headerOption" onClick={this.gotoPage.bind(this,'events')}>Latest Events</span>
+                <span className={pageName === '/latestMovies' ? "headerOption show-highlight" : "headerOption"} onClick={this.gotoPage.bind(this,'latest')}>Latest Movies</span>
+                <span className={pageName === '/upcomingMovies' ? "headerOption show-highlight" : "headerOption"} onClick={this.gotoPage.bind(this,'upcoming')}>UpComing Movies</span>
+                <span className={pageName === '/latestEvents' ? "headerOption show-highlight" : "headerOption"} onClick={this.gotoPage.bind(this,'events')}>Latest Events</span>
+                {showSearch ?
                 <div className="form-group" style={{ marginBottom: '0px' }}>
                   <input type="text" placeholder="Search" className="form-control" value={this.state.searchValue} onChange={this.startSearch.bind(this)}></input>
                 </div>
+                :null}
               </div>
             </div>
 
@@ -117,8 +112,9 @@ function mapState(state) {
   const latestMoviesCopy = movieReducer.latestCopy;
   const upcomingMoviesCopy = movieReducer.upComingCopy;
   const eventsCopy = eventReducer.eventsCopy;
+  const pageName = movieReducer.pageName;
 
-  return{latestMoviesCopy,upcomingMoviesCopy,eventsCopy};
+  return{latestMoviesCopy,upcomingMoviesCopy,eventsCopy, pageName};
     
 }
 const actionCreators = {

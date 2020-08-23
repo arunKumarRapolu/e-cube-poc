@@ -39,6 +39,10 @@ class BookingPage extends Component {
         }
     }
 
+    componentDidMount(){
+        this.props.savePage(this.props.location.pathname);
+    }
+
     handleChange = date => {
         this.setState({
             dateSelected: date,
@@ -168,7 +172,8 @@ function mapState(state) {
 }
 
 const actionCreators = {
-    saveUserSelects: movies.saveUserSelects
+    saveUserSelects: movies.saveUserSelects,
+    savePage: movies.savePage
 };
 
 export default compose(

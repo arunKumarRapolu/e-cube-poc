@@ -85,5 +85,13 @@
     width: 100%;
     padding: 30px;
 }
+.show-highlight{
+    background-color: white;
+    color:green;
+}
+.loader{
+    z-index: 20000;
+    float: right;
+}
 
 

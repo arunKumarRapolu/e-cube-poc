@@ -5,11 +5,16 @@ import { compose } from "redux";
 import { Row, Col } from 'react-bootstrap';
 import QRCode from 'qrcode.react';
 import Card from '@material-ui/core/Card';
+import { movies } from '../actions/movies';
 
 
 class ConfirmationPage extends Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount(){
+        this.props.savePage(this.props.location.pathname);
     }
 
     render() {
@@ -66,7 +71,12 @@ function mapState(state) {
     return { bookingData };
 
 }
+
+const actionCreators = {
+    savePage: movies.savePage
+};
+
 export default compose(
     withRouter,
-    connect(mapState, '')
+    connect(mapState, actionCreators)
 )(ConfirmationPage);

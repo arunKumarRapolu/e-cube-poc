@@ -12,7 +12,8 @@ class DetailPage extends Component {
     }
 
     componentDidMount() {
-        this.props.getDetails(this.props.match.params.id)
+        this.props.getDetails(this.props.match.params.id);
+        this.props.savePage(this.props.location.pathname);
     }
 
     gotoBooking(data) {
@@ -96,6 +97,7 @@ function mapState(state) {
 const actionCreators = {
     saveBookingInfo: movies.saveBookingInfo,
     getDetails: movies.getDetails,
+    savePage: movies.savePage
 };
 export default compose(
     withRouter,
