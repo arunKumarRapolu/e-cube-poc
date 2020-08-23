@@ -49,7 +49,7 @@ class LatestMovies extends Component {
 function mapState(state) {
     const { movieReducer } = state;
     const latestMovies = movieReducer.latest;
-  
+ 
     return{latestMovies};
       
   }

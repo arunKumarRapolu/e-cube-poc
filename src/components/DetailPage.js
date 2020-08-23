@@ -99,7 +99,7 @@ class DetailPage extends Component {
 function mapState(state) {
     const { movieReducer } = state;
     const details = movieReducer.details;
-
+    
     return { details };
 
 }
