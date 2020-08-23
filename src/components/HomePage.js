@@ -39,6 +39,7 @@ class HomePage extends Component {
     });
     return (
       <div className="main-page">
+        <div className="container">
         <Carousel>
           <Carousel.Item>
             <img
@@ -65,6 +66,7 @@ class HomePage extends Component {
             />
           </Carousel.Item>
         </Carousel>
+        </div>
         <div className="homePage-recommand"> Recommended Movies</div>
         <div className="container" style={{ padding: '20px' }}>
           <div className="row">
