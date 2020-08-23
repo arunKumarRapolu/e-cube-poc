@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { Row, Col } from 'react-bootstrap';
+import QRCode from 'qrcode.react';
 import Card from '@material-ui/core/Card';
 
 
@@ -12,6 +13,7 @@ class ConfirmationPage extends Component {
     }
 
     render() {
+        const {bookingData} = this.props;
         return (
             <React.Fragment>
                 <div className="confirmation-page" style={{ width: '100%' }}>
@@ -21,26 +23,29 @@ class ConfirmationPage extends Component {
 
                             <Row>
                                 <Col md="3">
-
-                                    <img style={{ height: '150px',width:'100%' }} src="https://lh3.googleusercontent.com/proxy/JeZ-HUDyWZlCTuwTWM4EcoM9T6dyC--TefNd9KvcvgdLxYdPYBO2HyKa-3y8VKhebgRM-s0zLGmsJrVgB7h9Q0XDTo-ThhpjdoYUYUl7he0JsBs7HIYvCFAi" />
+                                    <QRCode value={JSON.stringify(bookingData)}/>
+                                    {/* <img style={{ height: '150px',width:'100%' }} src="https://lh3.googleusercontent.com/proxy/JeZ-HUDyWZlCTuwTWM4EcoM9T6dyC--TefNd9KvcvgdLxYdPYBO2HyKa-3y8VKhebgRM-s0zLGmsJrVgB7h9Q0XDTo-ThhpjdoYUYUl7he0JsBs7HIYvCFAi" /> */}
                                 </Col>
                                 <Col md="6" className="p-0">
                                     <div className="row ">
                                         <div className="col-md-12">
-                                           Movie Name: {this.props.bookingData.movieName}                                                </div>
-                                    </div>
-                                    <div className="row ">
-                                        <div className="col-md-12">
-                                            Date : {this.props.bookingData.date}
+                                           Movie Name: {bookingData.movieName}
                                         </div>
                                     </div>
                                     <div className="row ">
                                         <div className="col-md-12">
-                                            Time : {this.props.bookingData.showTime}                                        </div>
+                                            Date : {bookingData.date}
+                                        </div>
                                     </div>
                                     <div className="row ">
                                         <div className="col-md-12">
-                                            Total Seats : {this.props.bookingData.noOfSeats}                                        </div>
+                                            Time : {bookingData.showTime}
+                                        </div>
+                                    </div>
+                                    <div className="row ">
+                                        <div className="col-md-12">
+                                            Total Seats : {bookingData.noOfSeats}
+                                        </div>
                                     </div>
                                   
                                 </Col>

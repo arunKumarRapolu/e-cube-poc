@@ -2,7 +2,8 @@ import { constants } from '../constants/allConstants.js';
 import { eventService } from '../services/events';
 
 export const events = {
-    getEvents
+    getEvents,
+    setEvents
 };
 
 function getEvents() {
@@ -21,4 +22,8 @@ function getEvents() {
 
     function success(list) { return { type: constants.GET_EVENTS_SUCCESS, list } }
     function failure(error) { return { type: constants.GET_EVENTS_FAILURE, error } }
+}
+
+function setEvents(list){
+    return { type: constants.SET_EVENTS, list }
 }

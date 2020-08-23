@@ -23,24 +23,26 @@ import Card from '@material-ui/core/Card';
 class BookingPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            radioSelected: null,
-            radioSelectedVal: null,
-            selectSlotError: false,
-            dateSelected: '',
-            noOfSeats: 1,
-            availableShows: [
-                { id: 1, time: "10:00 AM" },
-                { id: 2, time: "02:00 PM" },
-                { id: 3, time: "05:30 PM" },
-                { id: 4, time: "09:30 PM" }
+        this.state={
+            radioSelected:null,
+            radioSelectedVal:null,
+            selectSlotError:false,
+            dateSelected:'',
+            noOfSeats:1,
+            isDateSelcted: true,
+            availableShows:[
+                {id:1,time:"10:00 AM"},
+                {id:2,time:"02:00 PM"},
+                {id:3,time:"05:30 PM"},
+                {id:4,time:"09:30 PM"}
             ]
         }
     }
 
     handleChange = date => {
         this.setState({
-            dateSelected: date
+            dateSelected: date,
+            isDateSelcted:true
         });
     };
 
@@ -52,8 +54,20 @@ class BookingPage extends Component {
         this.setState({ noOfSeats: e.target.value });
     }
 
-    gotoConfirmation() {
-        let dateStr = new Date(this.state.dateSelected).getDate() + "/" + new Date(this.state.dateSelected).getMonth() + "/" + new Date(this.state.dateSelected).getFullYear();
+    gotoConfirmation(){
+        let proceed = true;
+        if(this.state.dateSelected === ''){
+            this.setState({isDateSelcted: false});
+            proceed = false;
+        }
+        if(this.state.radioSelectedVal === null){
+            this.setState({selectSlotError: true});
+            proceed = false;
+        }
+        if(!proceed){
+            return;
+        }
+        let dateStr = new Date(this.state.dateSelected).getDate() + "/" + (new Date(this.state.dateSelected).getMonth()+1) + "/" + new Date(this.state.dateSelected).getFullYear();
         let bookingData = {
             date: dateStr,
             showTime: this.state.radioSelectedVal,

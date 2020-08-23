@@ -6,7 +6,9 @@ export const movies = {
     getUpcoming,
     getDetails,
     saveBookingInfo,
-    saveUserSelects
+    saveUserSelects,
+    setlatestMovies,
+    setUpcomingMovies
 };
 
 function getLatest() {
@@ -69,4 +71,12 @@ function saveBookingInfo(data){
 
 function saveUserSelects(data){
     return { type: constants.SAVE_USER_SELECTS, data }
+}
+
+function setlatestMovies(list){
+    return { type: constants.SET_LATEST_MOVIES, list }
+}
+
+function setUpcomingMovies(list){
+    return { type: constants.SET_UPCOMING_MOVIES, list }
 }
