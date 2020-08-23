@@ -2,7 +2,9 @@ import { constants } from '../constants/allConstants';
 
 const initialState = {
   latest:[],
+  latestCopy:[],
   upComing:[],
+  upComingCopy:[],
   details:{},
   movieInfo:{},
   userSelectedInfo:{}
@@ -13,22 +15,26 @@ export function movieReducer(state = initialState, action) {
     case constants.GET_LATEST_SUCCESS:
       return {
         ...state,
-        latest: action.list
+        latest: action.list,
+        latestCopy: action.list
       };
     case constants.GET_LATEST_FAILURE:
       return {
         ...state,
-        latest:[]
+        latest:[],
+        latestCopy:[]
       };
     case constants.GET_UPCOMING_SUCCESS:
     return {
         ...state,
-        upComing: action.list
+        upComing: action.list,
+        upComingCopy:action.list
     };
     case constants.GET_UPCOMING_FAILURE:
     return {
         ...state,
-        upComing:[]
+        upComing:[],
+        upComingCopy:[]
     };
     case constants.GET_DETAILS_SUCCESS:
     return {
@@ -50,6 +56,16 @@ export function movieReducer(state = initialState, action) {
         ...state,
         userSelectedInfo: action.data
     };
+    case constants.SET_LATEST_MOVIES:
+    return {
+        ...state,
+        latest: action.list
+    };
+    case constants.SET_UPCOMING_MOVIES:
+      return {
+          ...state,
+          upComing: action.list
+      };
     default:
       return state
   }

@@ -16,6 +16,7 @@ class BookingPage extends Component {
             selectSlotError:false,
             dateSelected:'',
             noOfSeats:1,
+            isDateSelcted: true,
             availableShows:[
                 {id:1,time:"10:00 AM"},
                 {id:2,time:"02:00 PM"},
@@ -27,7 +28,8 @@ class BookingPage extends Component {
 
     handleChange = date => {
         this.setState({
-            dateSelected: date
+            dateSelected: date,
+            isDateSelcted:true
         });
     };
 
@@ -40,7 +42,19 @@ class BookingPage extends Component {
     }
 
     gotoConfirmation(){
-        let dateStr = new Date(this.state.dateSelected).getDate() + "/" + new Date(this.state.dateSelected).getMonth() + "/" + new Date(this.state.dateSelected).getFullYear();
+        let proceed = true;
+        if(this.state.dateSelected === ''){
+            this.setState({isDateSelcted: false});
+            proceed = false;
+        }
+        if(this.state.radioSelectedVal === null){
+            this.setState({selectSlotError: true});
+            proceed = false;
+        }
+        if(!proceed){
+            return;
+        }
+        let dateStr = new Date(this.state.dateSelected).getDate() + "/" + (new Date(this.state.dateSelected).getMonth()+1) + "/" + new Date(this.state.dateSelected).getFullYear();
         let bookingData = {
             date:dateStr,
             showTime:this.state.radioSelectedVal,
@@ -58,7 +72,7 @@ class BookingPage extends Component {
                 <Col md="3" key={key}>
                     <div className="form-check">
                     <input data-test="input" type="radio" className="slotRadio" id={idN} value={val.time} onChange={this.slotSelected.bind(this,key)} checked={this.state.radioSelected == key ? true:false} />
-                        <label className="slotRadioLabel" for={idN} data-error="" data-success="" id="">{val.time}</label>
+                        <label className="slotRadioLabel" htmlFor={idN} data-error="" data-success="" id="">{val.time}</label>
                     </div>
                 </Col>
             )
@@ -73,16 +87,18 @@ class BookingPage extends Component {
                             onChange={this.handleChange}
                             minDate={new Date()}
                         />
+                        {!this.state.isDateSelcted ? <div className="errorMsg">Please select Date</div> : null}
                     </Col>
                 </Row>
                 <Row>
                     <Col md="4">
                         Available show Timings: 
                     </Col>
-                    <Col>
+                    <Col md="8">
                         <Row>
                             {renderShows}
                         </Row>
+                        {this.state.selectSlotError ? <div className="errorMsg">Please select Time</div> : null }
                     </Col>
                 </Row>
                 <Row>

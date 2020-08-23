@@ -40,3 +40,9 @@
 .slotRadioLabel{
     margin-left: 2%;
 }
+.errorMsg{
+    color: red;
+}
+.e-cube{
+    cursor: pointer;
+}

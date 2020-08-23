@@ -1,7 +1,8 @@
 import { constants } from '../constants/allConstants';
 
 const initialState = {
-  events:[]
+  events:[],
+  eventsCopy:[]
 }
 
 export function eventReducer(state = initialState, action) {
@@ -9,12 +10,19 @@ export function eventReducer(state = initialState, action) {
     case constants.GET_EVENTS_SUCCESS:
       return {
         ...state,
-        events: action.list
+        events: action.list,
+        eventsCopy: action.list
       };
     case constants.GET_EVENTS_FAILURE:
       return {
         ...state,
-        events:[]
+        events:[],
+        eventsCopy:[]
+      };
+    case constants.SET_EVENTS:
+      return {
+        ...state,
+        events:action.list
       };
     default:
       return state

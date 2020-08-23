@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 import { Row, Col } from 'react-bootstrap';
+import QRCode from 'qrcode.react';
 
 class ConfirmationPage extends Component {
     constructor(props){
@@ -10,18 +11,19 @@ class ConfirmationPage extends Component {
     }
 
     render() {
+        const {bookingData} = this.props;
         return (
             <React.Fragment>
                 <div className="listPageHead">Your Booking has been successful</div>
                 <Row>
                     <Col md="6">
-                        QR Code comes here
+                        <QRCode value={JSON.stringify(bookingData)}/>
                     </Col>
                     <Col md="6">
-                        <div>{this.props.bookingData.movieName}</div>
-                        <div>Date : {this.props.bookingData.date}</div>
-                        <div>Time : {this.props.bookingData.showTime}</div>
-                        <div>Total Seats : {this.props.bookingData.noOfSeats}</div>
+                        <div>{bookingData.movieName}</div>
+                        <div>Date : {bookingData.date}</div>
+                        <div>Time : {bookingData.showTime}</div>
+                        <div>Total Seats : {bookingData.noOfSeats}</div>
                     </Col>
                 </Row>
             </React.Fragment>
