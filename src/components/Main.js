@@ -18,7 +18,7 @@ class Main extends Component {
     render() {
         return (
             <>
-            <LoadingOverlay style={{ width: window.innerWidth, height: window.innerHeight, backgroundColor: 'papayawhip' }}> 
+            <LoadingOverlay style={{ height: window.innerHeight, backgroundColor: 'papayawhip' }}> 
             <div className="app-main">
                 <HeaderComponent />
                 <div className="app-content">
