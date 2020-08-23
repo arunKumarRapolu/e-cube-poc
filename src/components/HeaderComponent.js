@@ -42,7 +42,7 @@ class HeaderComponent extends Component {
     return (
       <div className="header">
         <AppBar position="relative">
-          <Toolbar>
+          <Toolbar style={{backgroundColor: '#333545'}}>
             <div className="header-content container">
               <Typography variant="h6" color="inherit" noWrap>
                 E Cube
