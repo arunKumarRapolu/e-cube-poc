@@ -6,7 +6,7 @@ import { Row, Col } from 'react-bootstrap';
 import QRCode from 'qrcode.react';
 import Card from '@material-ui/core/Card';
 import { movies } from '../actions/movies';
-
+import { toast } from 'react-toastify';
 
 class ConfirmationPage extends Component {
     constructor(props) {
@@ -15,6 +15,10 @@ class ConfirmationPage extends Component {
 
     componentDidMount(){
         this.props.savePage(this.props.location.pathname);
+        if(Object.keys(this.props.bookingData).length == 0){
+            toast.warn("Refresh not allowed here. Redirecing to Home");
+            this.props.history.push('/')
+        }
     }
 
     render() {
