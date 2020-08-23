@@ -1,53 +1,57 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {withRouter} from "react-router-dom";
-import {compose} from "redux";
+import { withRouter } from "react-router-dom";
+import { compose } from "redux";
 import { events } from '../actions/events';
 import CardComponent from "./common/Card";
 import Grid from '@material-ui/core/Grid';
+import { Row, Col } from 'react-bootstrap';
 
 class LatestEvents extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.getEvents();
     }
 
     render() {
-        const renderEvents = this.props.latestEvents.map((event,i)=>{
+        const renderEvents = this.props.latestEvents.map((event, i) => {
             return (
-                <CardComponent key={i} data={event}/>
+                <CardComponent key={i} data={event} />
             )
         });
         return (
             <React.Fragment>
-            <div className="listPageHead">Latest Events</div>
-            <Grid container style={{ padding: '20px' }}>
-                {this.props.latestEvents.length > 0 ?
-                    renderEvents :
-                    <div className="nodata">
-                        No Events Found
+                <div className="overall-page">
+                    <div className="listPageHead">Latest Events</div>
+                    <div className="container" style={{ padding: '20px' }}>
+                        <Row>                        {this.props.latestEvents.length > 0 ?
+                            renderEvents :
+                            <div className="nodata">
+                                No Events Found
                     </div>
-                }
-            </Grid>
+                        }
+                        </Row>
+                    </div>
+                </div>
             </React.Fragment>
         )
     }
 }
 
 function mapState(state) {
-    const {eventReducer } = state;
+    const { eventReducer } = state;
     const latestEvents = eventReducer.events;
-  
-    return{latestEvents};
-      
-  }
-  const actionCreators = {
-      getEvents: events.getEvents,
-    };
-  export default compose(
-      withRouter,
-      connect(mapState, actionCreators)
-    )(LatestEvents);
+
+    return { latestEvents };
+
+}
+const actionCreators = {
+    getEvents: events.getEvents,
+};
+export default compose(
+    withRouter,
+    connect(mapState, actionCreators)
+)(LatestEvents);

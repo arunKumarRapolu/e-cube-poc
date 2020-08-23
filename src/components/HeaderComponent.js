@@ -87,7 +87,8 @@ class HeaderComponent extends Component {
     return (
       <div className="header">
         <AppBar position="relative">
-          <Toolbar>
+          <Toolbar style={{backgroundColor: '#333545'}}>
+            <div className="container">
             <div className="header-content">
               <Typography variant="h6" color="inherit" className="e-cube" noWrap onClick={this.gotoHome.bind(this)}>
                 E Cube
@@ -103,7 +104,7 @@ class HeaderComponent extends Component {
                 </div>
               </div>
             </div>
-
+            </div>
           </Toolbar>
         </AppBar>
       </div>

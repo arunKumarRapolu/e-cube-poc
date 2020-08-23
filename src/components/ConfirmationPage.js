@@ -13,41 +13,49 @@ class ConfirmationPage extends Component {
     }
 
     render() {
-        const {bookingData} = this.props;
+        const { bookingData } = this.props;
         return (
             <React.Fragment>
-                <div className="confirmation-page" style={{ width: '100%' }}>
+                <div className="overall-page">
                     <div className="listPageHead">Your Booking has been successful</div>
-                    <div className="container">
-                        <Card>
-
+                    <div className="container" style={{ padding: '20px' }}>
+                        <Card style={{ padding: '25px' }}>
                             <Row>
                                 <Col md="3">
-                                    <QRCode value={JSON.stringify(bookingData)}/>
+                                    <QRCode style={{ height: '100%', width: '100%' }} value={JSON.stringify(bookingData)} />
                                     {/* <img style={{ height: '150px',width:'100%' }} src="https://lh3.googleusercontent.com/proxy/JeZ-HUDyWZlCTuwTWM4EcoM9T6dyC--TefNd9KvcvgdLxYdPYBO2HyKa-3y8VKhebgRM-s0zLGmsJrVgB7h9Q0XDTo-ThhpjdoYUYUl7he0JsBs7HIYvCFAi" /> */}
                                 </Col>
-                                <Col md="6" className="p-0">
-                                    <div className="row ">
+                                <Col md="6">
+                                    <div className="row rowpadding">
                                         <div className="col-md-12">
-                                           Movie Name: {bookingData.movieName}
+                                            <p className="labelColor"> Movie Name:
+                                                <span className="labelValue">{bookingData.movieName}</span>
+                                            </p>
                                         </div>
                                     </div>
-                                    <div className="row ">
+                                    <div className="row rowpadding ">
                                         <div className="col-md-12">
-                                            Date : {bookingData.date}
+                                            <p className="labelColor"> Date:
+                                                <span className="labelValue">{bookingData.date}</span>
+                                            </p>
                                         </div>
                                     </div>
-                                    <div className="row ">
+                                    <div className="row rowpadding ">
                                         <div className="col-md-12">
-                                            Time : {bookingData.showTime}
+                                            <p className="labelColor"> Time:
+                                                <span className="labelValue">{bookingData.showTime}</span>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                    <div className="row rowpadding ">
+                                        <div className="col-md-12">
+                                            <p className="labelColor">Total Seats:
+                                                <span className="labelValue" >{bookingData.noOfSeats}</span>
+                                            </p>
                                         </div>
                                     </div>
-                                    <div className="row ">
-                                        <div className="col-md-12">
-                                            Total Seats : {bookingData.noOfSeats}
-                                        </div>
-                                    </div>
-                                  
+
                                 </Col>
                             </Row>
                         </Card>

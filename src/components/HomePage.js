@@ -38,7 +38,7 @@ class HomePage extends Component {
       )
     });
     return (
-      <div className="main-page">
+      <div className="overall-page">
         <div className="container">
         <Carousel>
           <Carousel.Item>
