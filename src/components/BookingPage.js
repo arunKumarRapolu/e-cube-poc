@@ -1,14 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {withRouter} from "react-router-dom";
-import {compose} from "redux";
+import { withRouter } from "react-router-dom";
+import { compose } from "redux";
 import { Button, Row, Col, Form } from 'react-bootstrap';
 import { movies } from '../actions/movies';
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
+import DateFnsUtils from '@date-io/date-fns';
+import FormControl from '@material-ui/core/FormControl';
+import {
+    DatePicker,
+} from '@material-ui/pickers';
+
+import {
+    MuiPickersUtilsProvider,
+    KeyboardTimePicker,
+    KeyboardDatePicker,
+} from '@material-ui/pickers'
 import "react-datepicker/dist/react-datepicker.css";
+import Card from '@material-ui/core/Card';
+
 
 class BookingPage extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state={
             radioSelected:null,
@@ -33,12 +46,12 @@ class BookingPage extends Component {
         });
     };
 
-    slotSelected(id,evt){
-        this.setState({radioSelected : id, radioSelectedVal:evt.target.value,selectSlotError:false});
+    slotSelected(id, evt) {
+        this.setState({ radioSelected: id, radioSelectedVal: evt.target.value, selectSlotError: false });
     }
 
-    seatsSelected(e){
-        this.setState({noOfSeats:e.target.value});
+    seatsSelected(e) {
+        this.setState({ noOfSeats: e.target.value });
     }
 
     gotoConfirmation(){
@@ -56,9 +69,9 @@ class BookingPage extends Component {
         }
         let dateStr = new Date(this.state.dateSelected).getDate() + "/" + (new Date(this.state.dateSelected).getMonth()+1) + "/" + new Date(this.state.dateSelected).getFullYear();
         let bookingData = {
-            date:dateStr,
-            showTime:this.state.radioSelectedVal,
-            noOfSeats:this.state.noOfSeats,
+            date: dateStr,
+            showTime: this.state.radioSelectedVal,
+            noOfSeats: this.state.noOfSeats,
             movieName: this.props.movieInfo.name
         }
         this.props.saveUserSelects(bookingData);
@@ -66,76 +79,97 @@ class BookingPage extends Component {
     }
 
     render() {
-        const renderShows = this.state.availableShows.map((val,key) => {
-            let idN = "radio"+key;
-            return(
-                <Col md="3" key={key}>
+        const renderShows = this.state.availableShows.map((val, key) => {
+            let idN = "radio" + key;
+            return (
+                <Col md="2" key={key}>
                     <div className="form-check">
-                    <input data-test="input" type="radio" className="slotRadio" id={idN} value={val.time} onChange={this.slotSelected.bind(this,key)} checked={this.state.radioSelected == key ? true:false} />
-                        <label className="slotRadioLabel" htmlFor={idN} data-error="" data-success="" id="">{val.time}</label>
+                        <input data-test="input" type="radio" className="slotRadio" id={idN} value={val.time} onChange={this.slotSelected.bind(this, key)} checked={this.state.radioSelected == key ? true : false} />
+                        <label className="slotRadioLabel" for={idN} data-error="" data-success="" id="">{val.time}</label>
                     </div>
                 </Col>
             )
         });
         return (
             <React.Fragment>
-                <Row>
-                    <Col md="4">Select Date :</Col>
-                    <Col md="8">
-                        <DatePicker
-                            selected={this.state.dateSelected}
-                            onChange={this.handleChange}
-                            minDate={new Date()}
-                        />
-                        {!this.state.isDateSelcted ? <div className="errorMsg">Please select Date</div> : null}
+                <div className="booking-page">
+                    <div className="container">
+                        <Card style={{ padding: '24px 30px' }}>
+                            <Row className="rowpadding">
+                                <Col md="3">Select Date :</Col>
+                                <Col md="6">
+                                    {/* <DatePicker
+                                        selected={this.state.dateSelected}
+                                        onChange={this.handleChange}
+                                        minDate={new Date()}
+                                    /> */}
+                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                        <FormControl>
+                                            <KeyboardDatePicker
+                                                margin="normal"
+                                                id="date-picker-dialog"
+                                                autoOk
+                                                disableFuture
+                                                margin="0px"
+                                                format="MM/dd/yyyy"
+                                                inputVariant="outlined"
+                                                value={this.state.dateSelected}
+                                                onChange={this.handleChange} KeyboardButtonProps={{
+                                                    'aria-label': 'change date',
+                                                }}
+                                            />
+                                        </FormControl>
+                                    </MuiPickersUtilsProvider>
+                                </Col>
+                            </Row>
+                            <Row className="rowpadding">
+                                <Col md="3">
+                                    Available show Timings:
                     </Col>
-                </Row>
-                <Row>
-                    <Col md="4">
-                        Available show Timings: 
+                                <Col>
+                                    <Row>
+                                        {renderShows}
+                                    </Row>
+                                </Col>
+                            </Row>
+                            <Row className="rowpadding">
+                                <Col md="3">
+                                    Select Number of seats:
                     </Col>
-                    <Col md="8">
-                        <Row>
-                            {renderShows}
-                        </Row>
-                        {this.state.selectSlotError ? <div className="errorMsg">Please select Time</div> : null }
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md="4">
-                        Select Number of seats:
-                    </Col>
-                    <Col md="8">
-                    <Form.Control as="select" size="sm" custom onChange={this.seatsSelected.bind(this)}>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </Form.Control>
-                    </Col>
-                </Row>
-                <Row>
-                <Col><Button variant="primary" onClick={this.gotoConfirmation.bind(this)}>Book Now</Button></Col>
-                </Row>
+                                <Col md="6">
+                                    <Form.Control as="select" size="sm" custom onChange={this.seatsSelected.bind(this)}>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </Form.Control>
+                                </Col>
+                            </Row>
+                            <Row className="rowpadding">
+                                <Col><Button variant="primary" onClick={this.gotoConfirmation.bind(this)}>Book Now</Button></Col>
+                            </Row>
+                        </Card>
+                    </div>
+                </div>
             </React.Fragment>
         )
     }
 }
 
 function mapState(state) {
-    const {movieReducer } = state;
+    const { movieReducer } = state;
     const movieInfo = movieReducer.movieInfo;
-  
-    return{movieInfo};
-      
-  }
 
-  const actionCreators = {
-        saveUserSelects : movies.saveUserSelects
-    };
+    return { movieInfo };
+
+}
+
+const actionCreators = {
+    saveUserSelects: movies.saveUserSelects
+};
 
 export default compose(
     withRouter,
     connect(mapState, actionCreators)
-  )(BookingPage);
+)(BookingPage);

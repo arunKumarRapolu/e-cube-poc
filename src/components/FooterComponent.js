@@ -10,18 +10,7 @@ class FooterComponent extends Component {
     render() {
         return (
       <footer >
-     
-      <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-        Something here to give the footer a purpose!
-      </Typography>
-      <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
+  
     </footer>
         )
     }

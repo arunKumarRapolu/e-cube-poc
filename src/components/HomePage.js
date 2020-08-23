@@ -66,16 +66,16 @@ class HomePage extends Component {
           </Carousel.Item>
         </Carousel>
         <div className="homePage-recommand"> Recommended Movies</div>
-        <Grid container style={{ padding: '20px' }}>
+        <div className="container" style={{ padding: '20px' }}>
+          <div className="row">
           {this.props.latestMovies.length > 0 ?
             renderRecommandedMovies:
             <div className="nodata">
                 No Movies Found
             </div>
           }
-        </Grid>
-
-
+          </div>
+        </div>
       </div>
     )
   }
