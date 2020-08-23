@@ -12,7 +12,8 @@ class DetailPage extends Component {
     }
 
     componentDidMount() {
-        this.props.getDetails(this.props.match.params.id)
+        this.props.getDetails(this.props.match.params.id);
+        this.props.savePage(this.props.location.pathname);
     }
 
     gotoBooking(data) {
@@ -36,32 +37,41 @@ class DetailPage extends Component {
                                 <Card>
                                     <div className="row">
                                         <div className="col-md-3">
-                                        <img src={data.imageUrl} style={{width:'100%'}}/>
+                                            <img src={data.imageUrl} style={{ width: '100%' }} />
                                         </div>
                                         <div className="col-md-9 p-3">
                                             <div className="row rowpadding">
                                                 <div className="col-md-6">
-                                                    <p>Movie Name : 
-                                                        <span>{data.name}</span>
-                                                        </p>
+                                                    <p className="labelColor">Movie Name :
+                                                        <span className="labelValue">{data.name}</span>
+                                                    </p>
                                                 </div>
+
                                                 <div className="col-md-6">
-                                                Language: {data.language}
+                                                    <p className="labelColor">Language :
+                                                        <span className="labelValue">{data.language}</span>
+                                                    </p>
                                                 </div>
                                             </div>
                                             <div className="row rowpadding">
                                                 <div className="col-md-12">
-                                                Type: {data.type}
+                                                    <p className="labelColor">Type :
+                                                        <span className="labelValue">{data.type}</span>
+                                                    </p>
+                                                </div>
+
+
+                                            </div>
+                                            <div className="row rowpadding">
+                                                <div className="col-md-12">
+                                                <p className="labelColor">Rating :
+                                                        <span className="labelValue">{data.rate}</span>
+                                                    </p>
                                                 </div>
                                             </div>
                                             <div className="row rowpadding">
                                                 <div className="col-md-12">
-                                                Rating: {data.rate}
-                                                </div>
-                                            </div>
-                                            <div className="row rowpadding">
-                                                <div className="col-md-12">
-                                                <Button variant="primary" onClick={this.gotoBooking.bind(this, data)}>Book Now</Button>                                                </div>
+                                                    <Button variant="primary" onClick={this.gotoBooking.bind(this, data)}>Book Now</Button>                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -96,6 +106,7 @@ function mapState(state) {
 const actionCreators = {
     saveBookingInfo: movies.saveBookingInfo,
     getDetails: movies.getDetails,
+    savePage: movies.savePage
 };
 export default compose(
     withRouter,

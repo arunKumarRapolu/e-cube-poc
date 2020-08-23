@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { events } from '../actions/events';
+import { movies } from '../actions/movies';
 import CardComponent from "./common/Card";
 import Grid from '@material-ui/core/Grid';
 import { Row, Col } from 'react-bootstrap';
@@ -14,6 +15,7 @@ class LatestEvents extends Component {
 
     componentDidMount() {
         this.props.getEvents();
+        this.props.savePage(this.props.location.pathname);
     }
 
     render() {
@@ -44,14 +46,15 @@ class LatestEvents extends Component {
 function mapState(state) {
     const { eventReducer } = state;
     const latestEvents = eventReducer.events;
-
-    return { latestEvents };
-
-}
-const actionCreators = {
-    getEvents: events.getEvents,
-};
-export default compose(
-    withRouter,
-    connect(mapState, actionCreators)
-)(LatestEvents);
+  
+    return{latestEvents};
+      
+  }
+  const actionCreators = {
+      getEvents: events.getEvents,
+      savePage: movies.savePage
+    };
+  export default compose(
+      withRouter,
+      connect(mapState, actionCreators)
+    )(LatestEvents);

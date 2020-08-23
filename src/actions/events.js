@@ -9,12 +9,16 @@ export const events = {
 function getEvents() {
     
     return dispatch => {
+        dispatch(showLoader());
+        dispatch(success([]));
         eventService.getEvents()
             .then(
-                data => { 
+                data => {
+                    dispatch(hideLoader());
                     dispatch(success(data.data));
                 },
                 error => {
+                    dispatch(hideLoader());
                     dispatch(failure(error));
                 }
             );
@@ -22,6 +26,8 @@ function getEvents() {
 
     function success(list) { return { type: constants.GET_EVENTS_SUCCESS, list } }
     function failure(error) { return { type: constants.GET_EVENTS_FAILURE, error } }
+    function showLoader() { return { type: constants.SHOW_LOADER } }
+    function hideLoader() { return { type: constants.HIDE_LOADER } }
 }
 
 function setEvents(list){

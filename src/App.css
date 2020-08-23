@@ -15,7 +15,7 @@
 
 .headerOption{
     cursor: pointer;
-    margin-right: 15px;
+    margin-right: 20px;
 }
 
 .homePage-recommand, .listPageHead, .noDetails{
@@ -41,6 +41,7 @@
 }
 .errorMsg{
     color: red;
+    font-size: 14px;
 }
 .labelColor{
     color:gray;
@@ -48,7 +49,7 @@
 }
 .labelValue{
     color: black;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 .e-cube{
     cursor: pointer;
@@ -98,4 +99,21 @@
 .overall-page{
     width: 100%;
 }
+.show-highlight{
+    color: #b0b0b3;
+}
+.show-highlight:hover{
+    color: rgba(255,255,255,.75);
+}
+
+.bookingpadding{
+    padding: 8px 0px;
+}
+
+
+.loader{
+    z-index: 20000;
+    float: right;
+}
+
 

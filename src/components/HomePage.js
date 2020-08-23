@@ -13,7 +13,8 @@ class HomePage extends Component {
     }
 
     componentDidMount(){
-        this.props.getMovies()
+        this.props.getMovies();
+        this.props.savePage(this.props.location.pathname);
     }
 
   render() {
@@ -40,12 +41,11 @@ class HomePage extends Component {
     return (
       <div className="overall-page">
         <div className="container">
-        <Carousel>
+        <Carousel style={{marginTop:'30px'}}>
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://cdn.collider.com/wp-content/uploads/2012/05/dark-knight-rises-movie-poster-banner-catwoman.jpg"
-              alt="First slide"
+              src="https://www.desktopbackground.org/p/2013/07/25/612889_iron-man-wallpapers-image-gallery-hd-wallpapers-1080p_1920x1080_h.jpg"              alt="First slide"
             />
          
           </Carousel.Item>
@@ -61,7 +61,7 @@ class HomePage extends Component {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://cdn.collider.com/wp-content/uploads/2012/05/dark-knight-rises-movie-poster-banner-catwoman.jpg"
+              src="https://i1.wp.com/www.techbuzzonline.com/wp-content/uploads/2018/06/19-Doctor-Strange-Marvel-Comic-HD-Wallpaper.jpg?resize=800%2C450&ssl=1"
               alt="Third slide"
             />
           </Carousel.Item>
@@ -92,6 +92,7 @@ function mapState(state) {
 }
 const actionCreators = {
     getMovies: movies.getLatest,
+    savePage: movies.savePage
   };
 export default compose(
     withRouter,

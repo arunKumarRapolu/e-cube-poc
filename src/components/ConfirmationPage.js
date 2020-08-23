@@ -5,6 +5,7 @@ import { compose } from "redux";
 import { Row, Col } from 'react-bootstrap';
 import QRCode from 'qrcode.react';
 import Card from '@material-ui/core/Card';
+import { movies } from '../actions/movies';
 
 
 class ConfirmationPage extends Component {
@@ -12,12 +13,19 @@ class ConfirmationPage extends Component {
         super(props);
     }
 
+    componentDidMount(){
+        this.props.savePage(this.props.location.pathname);
+    }
+
     render() {
         const { bookingData } = this.props;
         return (
             <React.Fragment>
                 <div className="overall-page">
-                    <div className="listPageHead">Your Booking has been successful</div>
+                    <div className="listPageHead">
+                    {/* <i className="fa fa-check-circle" aria-hidden="true"></i> */}
+                        {/* <img  style={{ height: '150px',width:'100%' }}  src="https://www.kindpng.com/picc/m/431-4312134_transparent-success-icon-hd-png-download.png"/> */}
+                        Your Booking has been successful</div>
                     <div className="container" style={{ padding: '20px' }}>
                         <Card style={{ padding: '25px' }}>
                             <Row>
@@ -74,7 +82,12 @@ function mapState(state) {
     return { bookingData };
 
 }
+
+const actionCreators = {
+    savePage: movies.savePage
+};
+
 export default compose(
     withRouter,
-    connect(mapState, '')
+    connect(mapState, actionCreators)
 )(ConfirmationPage);

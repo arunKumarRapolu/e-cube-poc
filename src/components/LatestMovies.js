@@ -12,8 +12,9 @@ class LatestMovies extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        this.props.getMovies()
+    componentDidMount(){
+        this.props.getMovies();
+        this.props.savePage(this.props.location.pathname);
     }
     render() {
 
@@ -48,14 +49,15 @@ class LatestMovies extends Component {
 function mapState(state) {
     const { movieReducer } = state;
     const latestMovies = movieReducer.latest;
-
-    return { latestMovies };
-
-}
-const actionCreators = {
-    getMovies: movies.getLatest,
-};
-export default compose(
-    withRouter,
-    connect(mapState, actionCreators)
-)(LatestMovies);
+  
+    return{latestMovies};
+      
+  }
+  const actionCreators = {
+      getMovies: movies.getLatest,
+      savePage: movies.savePage
+    };
+  export default compose(
+      withRouter,
+      connect(mapState, actionCreators)
+    )(LatestMovies);
