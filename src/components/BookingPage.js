@@ -20,6 +20,7 @@ import {
 } from '@material-ui/pickers'
 import "react-datepicker/dist/react-datepicker.css";
 import Card from '@material-ui/core/Card';
+import { toast } from 'react-toastify';
 
 
 class BookingPage extends Component {
@@ -43,6 +44,12 @@ class BookingPage extends Component {
 
     componentDidMount(){
         this.props.savePage(this.props.location.pathname);
+        if(Object.keys(this.props.movieInfo).length == 0){
+            toast.warn("Refresh not allowed here. Redirecing to Home");
+            setTimeout(()=>{
+                this.props.history.push('/')
+            },1000) 
+        }
     }
 
     handleChange = date => {

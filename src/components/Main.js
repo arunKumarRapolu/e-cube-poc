@@ -5,6 +5,8 @@ import { compose } from "redux";
 import HeaderComponent from "./HeaderComponent";
 import FooterComponent from "./FooterComponent";
 import { LoadingOverlay, Loader } from 'react-overlay-loader';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
  
 import 'react-overlay-loader/styles.css';
 
@@ -15,6 +17,7 @@ class Main extends Component {
 
     render() {
         return (
+            <>
             <LoadingOverlay style={{ width: window.innerWidth, height: window.innerHeight, backgroundColor: 'papayawhip' }}> 
             <div className="app-main">
                 <HeaderComponent />
@@ -26,6 +29,8 @@ class Main extends Component {
             </div>
             <Loader loading={this.props.showLoader}/>
             </LoadingOverlay>
+            <ToastContainer position="top-center" autoClose={2000} hideProgressBar={true} newestOnTop={false} rtl={false}/>
+            </>
         )
     }
 }
