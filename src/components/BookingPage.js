@@ -10,7 +10,9 @@ import FormControl from '@material-ui/core/FormControl';
 import {
     DatePicker,
 } from '@material-ui/pickers';
-
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import {
     MuiPickersUtilsProvider,
     KeyboardTimePicker,
@@ -27,7 +29,7 @@ class BookingPage extends Component {
             radioSelected:null,
             radioSelectedVal:null,
             selectSlotError:false,
-            dateSelected:'',
+            dateSelected:null,
             noOfSeats:1,
             isDateSelcted: true,
             availableShows:[
@@ -56,7 +58,8 @@ class BookingPage extends Component {
 
     gotoConfirmation(){
         let proceed = true;
-        if(this.state.dateSelected === ''){
+        debugger
+        if(this.state.dateSelected === null){
             this.setState({isDateSelcted: false});
             proceed = false;
         }
@@ -82,11 +85,14 @@ class BookingPage extends Component {
         const renderShows = this.state.availableShows.map((val, key) => {
             let idN = "radio" + key;
             return (
-                <Col md="2" key={key}>
-                    <div className="form-check">
+                <Col md="3" key={key}>
+                    {/* <div className="form-check">
                         <input data-test="input" type="radio" className="slotRadio" id={idN} value={val.time} onChange={this.slotSelected.bind(this, key)} checked={this.state.radioSelected == key ? true : false} />
                         <label className="slotRadioLabel" for={idN} data-error="" data-success="" id="">{val.time}</label>
-                    </div>
+                    </div> */}
+
+                    <FormControlLabel value={val.time} onChange={this.slotSelected.bind(this, key)} checked={this.state.radioSelected == key ? true : false}   control={<Radio color="primary" />} label={val.time} />
+
                 </Col>
             )
         });
@@ -111,6 +117,7 @@ class BookingPage extends Component {
                                                 autoOk
                                                 disableFuture
                                                 margin="0px"
+                                                placeholder="select Date"
                                                 format="MM/dd/yyyy"
                                                 inputVariant="outlined"
                                                 value={this.state.dateSelected}
